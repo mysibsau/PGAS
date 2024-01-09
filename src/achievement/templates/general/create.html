@@ -1,0 +1,23 @@
+{% load django_bootstrap5 %}
+{% load create_link %}
+
+<turbo-frame id="add_new_element">
+    <div class="block-text mb-5">
+        <h1 class="mb-4 text-center">Новый {{ verbose_name }}</h1>
+        <form method="post" action="{{ statement|create_link:model_name }}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% include 'document/edit.html' %}
+            <button type="submit" class="btn btn-success" onclick="reloadList()">Сохранить</button>
+            <a class="btn btn-warning" href="{% url 'achievements:new_achievement' pk=statement.pk %}">Отмена</a>
+        </form>
+    </div>
+    <script>
+        function reloadList() {
+            setTimeout(function () {
+                const listFrame = document.getElementById('statement_{{ statement.pk }}');
+                listFrame.reload();
+            }, 1000);
+        }
+    </script>
+</turbo-frame>

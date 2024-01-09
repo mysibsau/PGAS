@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <h1 class="header-1 mb-5">Рейтинг</h1>
+
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col">Баллы</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Студент</th>
+            <th scope="col">Группа</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for statement in statements %}
+            <tr class="{% if statement.is_top %}table-success{% else %}table-secondary{% endif %}">
+                {% if user.is_staff or statement.user == request.user %}
+                    <td>{{ statement.score }}</td>
+                    <td>{{ statement.create_at }}</td>
+                    <td>{{ statement.user.first_name }}</td>
+                    <td>{{ statement.user.group }}</td>
+                {% else %}
+                    <td>{{ statement.score }}</td>
+                    <td>{{ statement.create_at }}</td>
+                    <td>*****</td>
+                    <td>*****</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

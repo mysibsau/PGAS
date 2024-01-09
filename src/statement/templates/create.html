@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block content %}
+    <h5>Заявка для этого семестра не найдена</h5>
+    <h1 class="mb-5">Давай создадим новую</h1>
+    <form action="" method="post" id="create">
+        {% csrf_token %}
+        <button class="btn btn-secondary" type="submit" id="submit">Создать с нуля</button>
+        {% if old_statement %}
+            или
+            <button class="btn btn-success" onclick="copyFromLast()">Скопировать с прошлой</button>
+        {% endif %}
+    </form>
+
+    <script>
+        function copyFromLast() {
+            let form = document.getElementById('create');
+            let newInput = document.createElement('input');
+            let button = document.getElementById('submit');
+            newInput.type = 'hidden';
+            newInput.name = 'copy';
+            newInput.value = 'true';
+            form.appendChild(newInput);
+            button.click();
+        }
+    </script>
+{% endblock %}

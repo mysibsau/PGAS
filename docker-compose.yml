@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    command: >
+      sh -c "python manage.py migrate &&
+             gunicorn core.wsgi --workers 2 --bind 0.0.0.0:80"
+    restart: unless-stopped
+
+  telegram:
+    build: .
+    env_file:
+      - .env
+    depends_on:
+      - app
+    command: >
+      sh -c "python manage.py telegram_bot"
+    restart: unless-stopped
+
+  db:
+    image: postgres:16.1-alpine3.19
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

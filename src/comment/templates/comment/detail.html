@@ -1,0 +1,22 @@
+<div class="inline-comments mt-5">
+    <div class="inline-comments-header align-middle" onclick="hide(this)">{{ object.comment_text }}</div>
+
+    <div class="body" style="display: none;">
+        <div class="inline-comments-content mb-5">
+            {% for comment in object.comments.all %}
+                <div class="mb-3">
+                    <div class="inline-comments-author">{{ comment.author.first_name }}</div>
+                    <div class="inline-comments-body">{{ comment.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        {% include 'comment/comment_form.html' %}
+    </div>
+</div>
+
+<script>
+    function hide(e) {
+        let comments = e.parentElement.getElementsByClassName("body")[0]
+        $(comments).toggle()
+    }
+</script>

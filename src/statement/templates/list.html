@@ -1,0 +1,5 @@
+{% if request.user.is_staff %}
+    {% include 'list/for_staff.html' with statements=statements %}
+{% else %}
+    {% include 'list/for_student.html' with statements=statements %}
+{% endif %}

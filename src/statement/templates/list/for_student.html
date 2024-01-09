@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="header-1 mb-5">Мои заявки</h1>
+
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border-radius: 30px;
+            border: 1px solid #e6e6e6;
+            transition: all 0.5s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            transition: all 0.5s;
+        }
+
+        .color {
+            background-color: #FFFFFF;
+            transition: all 0.5s;
+        }
+
+        .card-body:hover > .color {
+            background-color: #01223E;
+            transition: all 0.5s;
+        }
+
+    </style>
+
+    <div class="row">
+        {% for statement in statements %}
+            <div class="col-sm-4">
+                <a href="{% url 'statement:detail' pk=statement.pk %}" class="link-dark text-decoration-none">
+                    <div class="card"
+                         style="height: 20em; background-image: url('{% static statement.card_background %}');">
+                        <div class="card-body text-center">
+                            <div class="align-middle mt-5 color">
+                                <h1 class="card-title">{{ statement.term }}
+                                    семетр<br> {{ statement.create_at.year|add:"-1" }} года</h1>
+                                <p class="card-text">{{ statement.get_status_display }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <h2 class="header-2">Старых заявок нет 🥺</h2>
+        {% endfor %}
+    </div>
+{% endblock %}

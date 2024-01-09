@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <turbo-frame id="add_new_element">
+        <div class="block-text mb-5" style="border-style: dashed;">
+            <h1 class="mb-4">Для начала выбери вид достижения</h1>
+            <select class="form-select mb-5" aria-label="Default select example" id="type">
+                {% for url, type in types %}
+                    <option value="{{ url }}">{{ type }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" onclick="changeType()">Далее</button>
+            <a class="btn btn-warning" href="{% url 'statement:detail' pk=statement.pk %}">Отмена</a>
+        </div>
+        <script>
+            function changeType() {
+                let select = document.getElementById('type');
+                let turbo_frame = document.getElementById('add_new_element');
+                turbo_frame.setAttribute('src', select.value);
+            }
+        </script>
+    </turbo-frame>
+{% endblock %}

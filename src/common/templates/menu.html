@@ -1,0 +1,41 @@
+{% load static %}
+{% load sass_tags %}
+
+<link href="{% sass_src 'common/menu.scss' %}" rel="stylesheet" type="text/css"/>
+
+<div class="header">
+    <a href="/" class="header-logo">
+        <img src="{% static 'common/logo.png' %}" class="header-logo-image" alt="logo"/>
+        ПГАС
+    </a>
+    <div class="header-menu">
+        {% if not request.user.is_staff %}
+            <a href="{% url 'statement:creat' %}">
+                <span>✏️</span>
+                <span>Моя заявка</span>
+            </a>
+
+            <a href="{% url 'statement:list' %}">
+                <span>🗂️</span>
+                <span>Архив</span>
+            </a>
+        {% else %}
+            <a href="{% url 'statement:list' %}">
+                <span>🗂️</span>
+                <span>Заявки</span>
+            </a>
+        {% endif %}
+
+        <a href="{% url 'statement:rating' %}">
+            <span>🥇</span>
+            <span>Рейтинг</span>
+        </a>
+
+        {% if request.user.is_staff %}
+            <a>🔍</a>
+            <a>⚙️</a>
+        {% endif %}
+
+        <a href="{% url 'user:me' %}">👤</a>
+    </div>
+</div>

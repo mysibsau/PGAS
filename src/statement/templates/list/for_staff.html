@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Заявки</h1>
+
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Студент</th>
+            <th scope="col">Группа</th>
+            <th scope="col">Рейтинг</th>
+            <th scope="col">Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for statement in statements %}
+            <tr class="{% if not statement.active %}text-secondary{% endif %}">
+                <th scope="row"><a href="{% url 'statement:detail' pk=statement.pk %}">{{ forloop.counter }}</a></th>
+                <td>{{ statement.create_at }}</td>
+                <td>{{ statement.user.first_name }}</td>
+                <td>{{ statement.user.group }}</td>
+                <td>{{ statement.score }}</td>
+                <td>{{ statement.get_status_display }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

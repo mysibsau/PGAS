@@ -1,0 +1,8 @@
+<h4 class="mb-3">Документы</h4>
+<div class="row mb-5 p-3" style="border-style: dashed; border-radius: 15px">
+    {% for document in documents.all %}
+        {% include 'document/detail.html' with document=document %}
+    {% empty %}
+        <h5 class="text-center align-middle">Перетащите файлы сюда</h5>
+    {% endfor %}
+</div>

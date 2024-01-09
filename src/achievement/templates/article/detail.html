@@ -1,0 +1,6 @@
+{% extends 'general/detail.html' %}
+{% block content %}
+    <h4 class="mb-3">Вид: {{ object.get_type_display }}</h4>
+    <h4 class="mb-3">Количество сооавторов: {{ object.count_coauthors }}</h4>
+    <h4 class="mb-3">Ссылка: <a href="{{ object.url }}">{{ object.url }}</a></h4>
+{% endblock %}

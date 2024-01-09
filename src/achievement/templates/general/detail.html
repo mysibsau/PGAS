@@ -1,0 +1,63 @@
+<style>
+    .block-text:hover > .btnn {
+        display: block;
+    }
+
+    .card:hover > * > .btnn {
+        display: block;
+    }
+
+    .card:hover > a > .card-body {
+        color: #f8f9fa;
+    }
+
+    .btnn {
+        background-color: white;
+        display: none;
+    }
+
+</style>
+
+{% load edit_link %}
+
+<turbo-frame id="achievement_{{ object.pk }}">
+    <div class="block-text mb-5 position-relative">
+        <div class="header-2 mb-5">{{ object.name }}
+            {{ object.pretty_status|safe }}
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        {% include 'document/list.html' with documents=object.documents.all %}
+
+        {% include 'comment/detail.html' with object=object %}
+
+        {% if object.statement.user == request.user and object.statement.active %}
+            <a href="{{ object|edit_link }}"
+               class="btn btnn btn-outline-primary rounded-circle position-absolute top-0 start-100 translate-middle">
+                <i class="fas fa-pen"></i>
+            </a>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+            <biv class="btnn position-absolute top-0 end-0 col">
+                {% if object.status == 0 or object.status == 2 %}
+                    <a href="{{ object|edit_link }}"
+                       class="button row mb-1"
+                       data-toggle="tooltip" data-placement="left" title="Одобрить достижение">
+                        ✅
+                    </a>
+                    <br>
+                {% endif %}
+                {% if object.status == 0 or object.status == 1 %}
+                    <a href="{{ object|edit_link }}"
+                       class="button row"
+                       data-toggle="tooltip" data-placement="left" title="Отклонить достижение">
+                        ❌
+                    </a>
+                {% endif %}
+            </biv>
+        {% endif %}
+    </div>
+</turbo-frame>

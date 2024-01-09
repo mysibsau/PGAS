@@ -1,0 +1,10 @@
+// base.scss
+
+@import 'variables.scss';
+
+body, html {
+    background-color: $main-bg-color;
+    height: 100%;
+    font-family: "Ubuntu", Helvetica, Verdana, sans-serif;
+    color: $secondary-color;
+}

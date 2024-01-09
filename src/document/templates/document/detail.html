@@ -1,0 +1,19 @@
+<div class="col-sm-3">
+    <div class="card position-relative">
+        <a href="{{ document.file.url }}" class="link-dark text-decoration-none" target="_blank">
+            <div class="card-body">
+                <p class="card-title text-center">{{ document }}</p>
+            </div>
+        </a>
+        {% if document.author == request.user %}
+            <form method="post">
+                {% csrf_token %}
+                <button
+                        class="position-absolute top-0 start-100 translate-middle btn btnn btn-outline-danger rounded-circle delete-animation delete"
+                        type="submit">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
+        {% endif %}
+    </div>
+</div>

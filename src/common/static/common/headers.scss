@@ -1,0 +1,27 @@
+@import "variables.scss";
+
+%header-common-styles {
+  text-align: center;
+  line-height: 1.3em;
+  margin: 0 auto;
+  max-width: 1400px;
+  color: $secondary-color;
+}
+
+h1, .header-1 {
+  @extend %header-common-styles;
+  font-weight: 700;
+  font-size: 300%;
+}
+
+h2, .header-2 {
+  @extend %header-common-styles;
+  font-weight: 500;
+  font-size: 210%;
+}
+
+h3, .header-3 {
+  @extend %header-common-styles;
+  font-weight: 300;
+  font-size: 170%;
+}

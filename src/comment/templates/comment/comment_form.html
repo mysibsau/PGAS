@@ -1,0 +1,15 @@
+{% load django_bootstrap5 %}
+{% load class_name %}
+
+
+{% block content %}
+    <form class="inline-comments-inputs" method="post" action="{% url 'comments:create_comment' %}">
+        {% csrf_token %}
+        <textarea rows="2" name="text" class="form-control inline-comments-form-textarea"
+                  placeholder="Откомментировать прямо здесь..."></textarea>
+        <input type="hidden" value="{{ object.pk }}" name="object_pk">
+        <input type="hidden" value="{{ object.statement.pk }}" name="statement">
+        <input type="hidden" value="{{ object|class_name }}" name="object_name">
+        <input type="submit" class="button inline-comments-form-submit" value="↵" style="padding: 10px;">
+    </form>
+{% endblock %}

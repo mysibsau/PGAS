@@ -1,0 +1,25 @@
+@import "variables.scss";
+
+.block-text {
+  margin: 40px auto 40px;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  background-color: $primary-color;
+}
+
+.dashed {
+  border-style: dashed;
+  color: $secondary-color;
+  background-color: transparent;
+}
+
+.card {
+  &:hover {
+    background-color: $secondary-color;
+
+    * {
+      color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+[project]
+name = "pgas"
+version = "0.1.0"
+description = "Система распределения стипендий"
+authors = [
+    {name = "w0rng", email = "work@w0rng.ru"},
+]
+dependencies = [
+    "django>=5.0.1",
+    "loguru>=0.7.2",
+    "whitenoise>=6.6.0",
+    "gunicorn>=21.2.0",
+    "django-lifecycle>=1.1.2",
+    "django-odoo-auth>=1.0.4.1",
+    "django-login-required-middleware>=0.9.0",
+    "django-bootstrap5>=23.4",
+    "turbo-django>=0.4.4",
+    "pyTelegramBotAPI>=4.14.1",
+    "django-compressor>=4.4",
+    "django-sass-processor>=1.4",
+    "libsass>=0.22.0",
+    "psycopg[binary]>=3.1.17",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+package-type = "application"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "black>=23.12.1",
+    "isort>=5.13.2",
+    "ruff>=0.1.9",
+    "django-extensions>=3.2.3",
+    "django-debug-toolbar>=4.2.0",
+    "mixer>=7.2.2",
+    "django-stubs>=4.2.7",
+    "mypy>=1.8.0",
+]
+
+[tool.pdm.scripts]
+start = "python src/manage.py runserver"
+make-migrations = "python src/manage.py makemigrations"
+migrate = "python src/manage.py migrate"
+shell = "python src/manage.py shell_plus"

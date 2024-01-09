@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <turbo-frame id="statement_{{ statement.pk }}">
+        <div class="block-text">
+            <div class="header-2">Моя заявка на {{ statement.create_at.year }} год
+                {{ statement.pretty_status|safe }}</div>
+            <div class="header-3 mb-3">{{ statement.term }} семетр</div>
+            Предварительные баллы: {{ statement.preliminary_scores }} <br>
+            Текущие баллы: {{ statement.score }} <br>
+            <a class="btn btn-secondary btn-lg mt-5" data-toggle="tooltip" data-placement="top"
+               title="Распечатайте этот бланк после заполнения всех достижений">Скачать
+                бланк</a>
+        </div>
+
+        {% for key, models in statement.achievements.items %}
+            {% if models.count %}
+                <div class="header-1 mt-5">
+                    {{ key.0 }}
+                </div>
+                {% for model in models %}
+                    {% include key.1|add:'/detail.html' with object=model %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% if statement.active and statement.user == request.user %}
+            {% include 'general/add_new_element.html' %}
+        {% endif %}
+    </turbo-frame>
+{% endblock %}

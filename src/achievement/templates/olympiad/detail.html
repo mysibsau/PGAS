@@ -1,0 +1,10 @@
+{% extends 'general/detail.html' %}
+
+{% block content %}
+    {% if object.place != 4 %}
+        <h4 class="mb-3">{{ object.get_place_display }} место</h4>
+    {% else %}
+        <h4 class="mb-3">{{ object.get_place_display }}</h4>
+    {% endif %}
+    <h4 class="mb-3">Уровень: {{ object.get_level_display }}</h4>
+{% endblock %}
