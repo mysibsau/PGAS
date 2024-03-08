@@ -1,19 +1,12 @@
-FROM python:3.12 as builder
-
-WORKDIR /app
-
-RUN pip install --upgrade --no-cache-dir pip && pip install pdm
-COPY pdm.lock pyproject.toml ./
-
-RUN mkdir __pypackages__ && pdm sync --prod --no-editable
-
 FROM python:3.12-slim
 
+ENV VIRTUAL_ENV=/usr/local
 WORKDIR /app
 
-ENV PYTHONPATH=/pkgs
-COPY --from=builder /app/__pypackages__/3.12/lib /pkgs
-COPY --from=builder /app/__pypackages__/3.12/bin/* /bin/
+RUN pip install --upgrade --no-cache-dir pip && pip install uv
+COPY ./requirements.txt .
+
+RUN /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
 
 COPY ./src .
 

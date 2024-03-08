@@ -7,7 +7,7 @@ SECRET_KEY = getenv("SECRET_KEY", "SECRET_KEY")
 
 DEBUG = getenv("DEBUG", "false").lower() == "true"
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -34,6 +34,7 @@ ODOO_SERVER_DBNAME = getenv("ODOO_SERVER_DBNAME")
 ODOO_SERVER_PORT = getenv("ODOO_SERVER_PORT", "443")
 
 AUTHENTICATION_BACKENDS = ("common.backends.OdooBackend",)
+
 
 if DEBUG:
     INSTALLED_APPS += [
@@ -83,9 +84,9 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": "db",
+        "HOST": getenv("DB_HOST", "db"),
         "PORT": "5432",
-    }
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [

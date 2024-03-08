@@ -1,0 +1,7 @@
+black==23.12.1
+isort==5.13.2
+ruff==0.1.9
+django-extensions==3.2.3
+django-debug-toolbar==4.2.0
+mixer==7.2.2
+django-types==0.19.1
