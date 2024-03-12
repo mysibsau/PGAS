@@ -4,7 +4,7 @@
 <turbo-frame id="add_new_element">
     <div class="block-text mb-5">
         <h1 class="mb-4 text-center">Новый {{ verbose_name }}</h1>
-        <form method="post" action="{{ statement|create_link:model_name }}">
+        <form method="post" action="{{ statement|create_link:model_name }}" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% include 'document/edit.html' %}
