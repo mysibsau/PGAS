@@ -1,8 +1,9 @@
 from django.apps import apps
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-from django.core.exceptions import PermissionDenied
-
+from django.views.generic.detail import SingleObjectMixin
 from statement.models import Statement
 
 
@@ -68,7 +69,6 @@ class UpdateView(GeneralView, generic.UpdateView):
 
 
 class DeleteView(generic.DeleteView):
-
     def get_object(self, queryset=None):
         object = super().get_object(queryset)
         if object.author != self.request.user:
@@ -79,3 +79,26 @@ class DeleteView(generic.DeleteView):
 
     def get_success_url(self):
         return reverse("statement:detail", kwargs={"pk": self.object.statement.pk})
+
+
+class ApproveView(GeneralView, SingleObjectMixin, generic.View):
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.set_status()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def set_status(self):
+        self.object.status = 1
+        self.object.save()
+
+    def get_object(self, queryset=None):
+        object = super().get_object(queryset)
+        if not self.request.user.is_staff or not object.statement.active:
+            raise PermissionError("You can't approve this object")
+        return object
+
+
+class RejectView(ApproveView):
+    def set_status(self):
+        self.object.status = 2
+        self.object.save()
