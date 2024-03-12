@@ -10,23 +10,23 @@ DEBUG = getenv("DEBUG", "false").lower() == "true"
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "django_lifecycle_checks",
-    "django_bootstrap5",
-    "odoo_auth",
-    "turbo",
-    "sass_processor",
-    "common",
-    "user",
-    "document",
-    "comment",
-    "statement",
-    "achievement",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django_lifecycle_checks',
+    'django_bootstrap5',
+    'odoo_auth',
+    'turbo',
+    'sass_processor',
+    'common',
+    'user',
+    'document',
+    'comment',
+    'statement',
+    'achievement',
 ]
 
 ODOO_SERVER_URL = getenv("ODOO_SERVER_URL")
@@ -56,7 +56,7 @@ MIDDLEWARE = [
 
 if DEBUG:
     MIDDLEWARE += [
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        # "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
 
 ROOT_URLCONF = "core.urls"
@@ -79,13 +79,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": getenv("DB_HOST", "db"),
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     },
 }
 
@@ -128,7 +124,7 @@ INTERNAL_IPS = [
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/users/login/"
-LOGIN_REQUIRED_IGNORE_PATHS = ["/users/login/", "/users/logout/"]
+LOGIN_REQUIRED_IGNORE_PATHS = ['/users/login/', '/users/logout/']
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 

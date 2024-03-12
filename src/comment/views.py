@@ -17,7 +17,7 @@ class CommentCreateView(CreateView):
         ahivment = getattr(self.object, f'{class_name}_set').model.objects.get(pk=self.request.POST['object_pk'])
         if ahivment.author != self.request.user:
             ahivment.author.notify(
-                f'К вашему достижению "{ahivment.name}" был добавлен комментарий: "{self.object.text}"'
+                f'К вашему достижению "{ahivment.name}" был добавлен комментарий: "{self.object.text}"',
             )
         getattr(self.object, f"{class_name}_set").add(self.request.POST['object_pk'])
         return result

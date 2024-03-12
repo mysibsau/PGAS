@@ -2,9 +2,9 @@ import threading
 import xmlrpc.client
 
 from django.contrib import messages
+from loguru import logger
 from odoo_auth import backends, settings
 from odoo_auth.models import OdooUser
-from loguru import logger
 
 
 class OdooBackend(backends.OdooBackend):

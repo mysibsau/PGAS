@@ -2,6 +2,7 @@
 
 import datetime
 import uuid
+
 from django.db import migrations, models
 
 
@@ -38,7 +39,7 @@ class Migration(migrations.Migration):
                 (
                     "date",
                     models.DateField(
-                        default=datetime.datetime.now, verbose_name="Дата проведения"
+                        default=datetime.datetime.now, verbose_name="Дата проведения",
                     ),
                 ),
                 (
@@ -92,7 +93,7 @@ class Migration(migrations.Migration):
                 (
                     "date",
                     models.DateField(
-                        default=datetime.datetime.now, verbose_name="Дата проведения"
+                        default=datetime.datetime.now, verbose_name="Дата проведения",
                     ),
                 ),
                 (
@@ -154,7 +155,7 @@ class Migration(migrations.Migration):
                 (
                     "date",
                     models.DateField(
-                        default=datetime.datetime.now, verbose_name="Дата проведения"
+                        default=datetime.datetime.now, verbose_name="Дата проведения",
                     ),
                 ),
                 (

@@ -49,7 +49,6 @@ class CreateView(GeneralView, generic.CreateView):
 
     def form_valid(self, form):
         # TODO save files
-        print(self.request.FILES)
         form.instance.statement = Statement.objects.get(pk=self.kwargs["pk"])
         form.instance.author = self.request.user
         return super().form_valid(form)
