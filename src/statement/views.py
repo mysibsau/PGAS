@@ -1,7 +1,6 @@
-from django.db.transaction import atomic
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from .models import Statement
 
@@ -60,7 +59,10 @@ class StatementDetailView(DetailView):
 
     def get_queryset(self):
         queryset = Statement.objects.all().prefetch_related(
-            "user", "olympiads", "olympiads__documents", "olympiads__comments"
+            'user',
+            'olympiads',
+            'olympiads__documents',
+            'olympiads__comments',
         )
         if self.request.user.is_staff:
             return queryset
@@ -75,7 +77,7 @@ class RatingListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset().current_year()
-        result = list(sorted(queryset, key=lambda x: x.score, reverse=True))
+        result = sorted(queryset, key=lambda x: x.score, reverse=True)
         for i, statement in enumerate(result):
             statement.is_top = False
             if i <= 0:

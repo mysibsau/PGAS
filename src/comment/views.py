@@ -1,5 +1,7 @@
+from django.db.models import Q
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
+from login_required import LoginNotRequiredMixin
 
 from .models import Comment
 
@@ -19,3 +21,17 @@ class CommentCreateView(CreateView):
         statement = self.request.POST['statement']
 
         return reverse("statement:detail", kwargs={"pk": statement})
+
+
+class ListCommentsViews(ListView, LoginNotRequiredMixin):
+    model = Comment
+    context_object_name = 'comments'
+
+    def get_queryset(self):
+        all_fields = Comment._meta.get_fields()
+        filter = Q()
+        for f in all_fields:
+            if f.is_relation:
+                filter |= Q(**{f.name: self.kwargs['pk']})
+        print(Comment.objects.filter(filter).count())
+        return Comment.objects.filter(filter)
