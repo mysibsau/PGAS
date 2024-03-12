@@ -93,6 +93,7 @@ class ApproveView(GeneralView, SingleObjectMixin, generic.View):
                 text=f'Статус изменен: {self.STATUS._label_}',
             ),
         )
+        self.object.author.notify(f'Ваше достижение "{self.object.name}" было {self.STATUS._label_.lower()}')
         return HttpResponseRedirect(self.get_success_url())
 
     def set_status(self):
