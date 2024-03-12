@@ -14,9 +14,9 @@ class ModelMixin(models.Model):
     def comment_text(self) -> str:
         count = self.comments.count()
         if count == 0:
-            return "Комментариев нет"
-        elif count == 1:
-            return "1 комментарий"
-        elif count < 5:
-            return f"{count} комментария"
-        return f"{count} комментариев"
+            return 'Комментариев нет'
+        if count == 1:
+            return '1 комментарий'
+        if count < 5:
+            return f'{count} комментария'
+        return f'{count} комментариев'

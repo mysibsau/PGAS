@@ -13,10 +13,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Statement",
+            name='Statement',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.UUIDField(
                         db_index=True,
                         default=uuid.uuid4,
@@ -24,15 +24,15 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         unique=True,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("create_at", models.DateTimeField(auto_now_add=True)),
-                ("update_at", models.DateTimeField(auto_now=True)),
+                ('create_at', models.DateTimeField(auto_now_add=True)),
+                ('update_at', models.DateTimeField(auto_now=True)),
                 (
-                    "status",
+                    'status',
                     models.IntegerField(
-                        choices=[(0, "В обработке"), (1, "Одобрено"), (2, "Отклонено")],
+                        choices=[(0, 'В обработке'), (1, 'Одобрено'), (2, 'Отклонено')],
                         default=0,
                     ),
                 ),

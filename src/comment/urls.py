@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import CommentCreateView, ListCommentsViews
 
-app_name = "comments"
+app_name = 'comments'
 
 urlpatterns = [
     path('new/', CommentCreateView.as_view(), name='create_comment'),

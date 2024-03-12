@@ -12,10 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Document",
+            name='Document',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.UUIDField(
                         db_index=True,
                         default=uuid.uuid4,
@@ -23,11 +23,11 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         unique=True,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("file", models.FileField(upload_to="documents")),
-                ("create_at", models.DateTimeField(auto_now_add=True)),
+                ('file', models.FileField(upload_to='documents')),
+                ('create_at', models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

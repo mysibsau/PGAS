@@ -21,20 +21,20 @@ class CustomQuerySet(models.QuerySet):
 class CustomManager(models.Manager):
     def get_queryset(self):
         return (
-            super().get_queryset().prefetch_related("user", "olympiads", "olympiads__documents", "olympiads__comments")
+            super().get_queryset().prefetch_related('user', 'olympiads', 'olympiads__documents', 'olympiads__comments')
         )
 
 
 class Statement(LifecycleModelMixin, models.Model):
     class Status(models.IntegerChoices):
-        PENDING = 0, "В обработке"
-        APPROVED = 1, "Одобрено"
-        REJECTED = 2, "Отклонено"
+        PENDING = 0, 'В обработке'
+        APPROVED = 1, 'Одобрено'
+        REJECTED = 2, 'Отклонено'
 
-    id = models.UUIDField(_("ID"), default=uuid.uuid4, primary_key=True, editable=False, unique=True, db_index=True)
+    id = models.UUIDField(_('ID'), default=uuid.uuid4, primary_key=True, editable=False, unique=True, db_index=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey("user.User", on_delete=models.CASCADE)
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     status = models.IntegerField(choices=Status.choices, default=Status.PENDING)
 
     objects = CustomManager.from_queryset(CustomQuerySet)()
@@ -71,7 +71,7 @@ class Statement(LifecycleModelMixin, models.Model):
         return 2
 
     def achievements(self) -> dict[tuple[str, str], list]:
-        models = apps.get_app_config("achievement").get_models()
+        models = apps.get_app_config('achievement').get_models()
         result = defaultdict(list)
         for model in models:
             plural = model._meta.verbose_name_plural
@@ -82,9 +82,9 @@ class Statement(LifecycleModelMixin, models.Model):
     def pretty_status(self) -> str:
         html = '<span data-toggle="tooltip" data-placement="top" title="%s">%s</span>'
         status = {
-            Statement.Status.PENDING: html % ("В обработке", '🤔'),
-            Statement.Status.APPROVED: html % ("Принято", '✅'),
-            Statement.Status.REJECTED: html % ("Отклонено", '❌'),
+            Statement.Status.PENDING: html % ('В обработке', '🤔'),
+            Statement.Status.APPROVED: html % ('Принято', '✅'),
+            Statement.Status.REJECTED: html % ('Отклонено', '❌'),
         }
 
         return status[self.status]
@@ -96,7 +96,7 @@ class Statement(LifecycleModelMixin, models.Model):
         backgrounds = []
         for _root, _dirs, files in os.walk('./statement/static/statement/backgrounds'):
             for file in files:
-                if file.split(".")[-1] in ["jpg", "jpeg", "png"]:
+                if file.split('.')[-1] in ['jpg', 'jpeg', 'png']:
                     backgrounds.append(file)
 
         index = number % len(backgrounds)

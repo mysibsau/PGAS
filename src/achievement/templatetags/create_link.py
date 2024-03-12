@@ -6,4 +6,4 @@ register = template.Library()
 
 @register.filter
 def create_link(value, arg):
-    return reverse(f"achievements:create_{arg}", kwargs={"pk": value.pk})
+    return reverse(f'achievements:create_{arg}', kwargs={'pk': value.pk})

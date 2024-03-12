@@ -12,10 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Comment",
+            name='Comment',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.UUIDField(
                         db_index=True,
                         default=uuid.uuid4,
@@ -23,15 +23,15 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         unique=True,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("create_at", models.DateTimeField(auto_now_add=True)),
-                ("update_at", models.DateTimeField(auto_now=True)),
-                ("text", models.TextField()),
+                ('create_at', models.DateTimeField(auto_now_add=True)),
+                ('update_at', models.DateTimeField(auto_now=True)),
+                ('text', models.TextField()),
             ],
             options={
-                "ordering": ["create_at"],
+                'ordering': ['create_at'],
             },
         ),
     ]

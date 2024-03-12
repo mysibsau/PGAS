@@ -7,14 +7,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("comment", "0002_initial"),
+        ('comment', '0002_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="comment",
-            name="author",
+            model_name='comment',
+            name='author',
             field=models.ForeignKey(
                 blank=True,
                 null=True,

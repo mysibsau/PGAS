@@ -13,10 +13,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Article",
+            name='Article',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.UUIDField(
                         db_index=True,
                         default=uuid.uuid4,
@@ -24,53 +24,54 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         unique=True,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("name", models.CharField(max_length=255, verbose_name="Название")),
+                ('name', models.CharField(max_length=255, verbose_name='Название')),
                 (
-                    "status",
+                    'status',
                     models.IntegerField(
-                        choices=[(0, "В обработке"), (1, "Одобрено"), (2, "Отклонено")],
+                        choices=[(0, 'В обработке'), (1, 'Одобрено'), (2, 'Отклонено')],
                         default=0,
-                        verbose_name="Статус",
+                        verbose_name='Статус',
                     ),
                 ),
                 (
-                    "date",
+                    'date',
                     models.DateField(
-                        default=datetime.datetime.now, verbose_name="Дата проведения",
+                        default=datetime.datetime.now,
+                        verbose_name='Дата проведения',
                     ),
                 ),
                 (
-                    "type",
+                    'type',
                     models.IntegerField(
                         choices=[
-                            (1, "Web of Science/Scopus"),
-                            (2, "ВАК"),
-                            (3, "РИНЦ"),
-                            (4, "Остальное"),
+                            (1, 'Web of Science/Scopus'),
+                            (2, 'ВАК'),
+                            (3, 'РИНЦ'),
+                            (4, 'Остальное'),
                         ],
                         default=4,
-                        verbose_name="Тип публикации",
+                        verbose_name='Тип публикации',
                     ),
                 ),
-                ("url", models.URLField(verbose_name="Ссылка")),
+                ('url', models.URLField(verbose_name='Ссылка')),
                 (
-                    "count_coauthors",
-                    models.IntegerField(default=0, verbose_name="Количество соавторов"),
+                    'count_coauthors',
+                    models.IntegerField(default=0, verbose_name='Количество соавторов'),
                 ),
             ],
             options={
-                "verbose_name": "Публикация",
-                "verbose_name_plural": "Публикации",
+                'verbose_name': 'Публикация',
+                'verbose_name_plural': 'Публикации',
             },
         ),
         migrations.CreateModel(
-            name="Olympiad",
+            name='Olympiad',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.UUIDField(
                         db_index=True,
                         default=uuid.uuid4,
@@ -78,61 +79,62 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         unique=True,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("name", models.CharField(max_length=255, verbose_name="Название")),
+                ('name', models.CharField(max_length=255, verbose_name='Название')),
                 (
-                    "status",
+                    'status',
                     models.IntegerField(
-                        choices=[(0, "В обработке"), (1, "Одобрено"), (2, "Отклонено")],
+                        choices=[(0, 'В обработке'), (1, 'Одобрено'), (2, 'Отклонено')],
                         default=0,
-                        verbose_name="Статус",
+                        verbose_name='Статус',
                     ),
                 ),
                 (
-                    "date",
+                    'date',
                     models.DateField(
-                        default=datetime.datetime.now, verbose_name="Дата проведения",
+                        default=datetime.datetime.now,
+                        verbose_name='Дата проведения',
                     ),
                 ),
                 (
-                    "place",
+                    'place',
                     models.IntegerField(
                         choices=[
-                            (1, "🥇Первое"),
-                            (2, "🥈Второе"),
-                            (3, "🥉Третье"),
-                            (4, "Участник"),
+                            (1, '🥇Первое'),
+                            (2, '🥈Второе'),
+                            (3, '🥉Третье'),
+                            (4, 'Участник'),
                         ],
                         default=4,
-                        verbose_name="Занятое место",
+                        verbose_name='Занятое место',
                     ),
                 ),
                 (
-                    "level",
+                    'level',
                     models.IntegerField(
                         choices=[
-                            (1, "Международный"),
-                            (2, "Всероссийский"),
-                            (3, "Ведомственный"),
-                            (4, "Региональный"),
+                            (1, 'Международный'),
+                            (2, 'Всероссийский'),
+                            (3, 'Ведомственный'),
+                            (4, 'Региональный'),
                         ],
                         default=4,
-                        verbose_name="Уровень олимпиады",
+                        verbose_name='Уровень олимпиады',
                     ),
                 ),
             ],
             options={
-                "verbose_name": "Олимпиада",
-                "verbose_name_plural": "Олимпиады",
+                'verbose_name': 'Олимпиада',
+                'verbose_name_plural': 'Олимпиады',
             },
         ),
         migrations.CreateModel(
-            name="Patent",
+            name='Patent',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.UUIDField(
                         db_index=True,
                         default=uuid.uuid4,
@@ -140,40 +142,41 @@ class Migration(migrations.Migration):
                         primary_key=True,
                         serialize=False,
                         unique=True,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("name", models.CharField(max_length=255, verbose_name="Название")),
+                ('name', models.CharField(max_length=255, verbose_name='Название')),
                 (
-                    "status",
+                    'status',
                     models.IntegerField(
-                        choices=[(0, "В обработке"), (1, "Одобрено"), (2, "Отклонено")],
+                        choices=[(0, 'В обработке'), (1, 'Одобрено'), (2, 'Отклонено')],
                         default=0,
-                        verbose_name="Статус",
+                        verbose_name='Статус',
                     ),
                 ),
                 (
-                    "date",
+                    'date',
                     models.DateField(
-                        default=datetime.datetime.now, verbose_name="Дата проведения",
+                        default=datetime.datetime.now,
+                        verbose_name='Дата проведения',
                     ),
                 ),
                 (
-                    "type",
+                    'type',
                     models.IntegerField(
                         choices=[
-                            (1, "Патент на изобретение, свидетельство"),
-                            (2, "Патент на полезную модель"),
-                            (3, "Заявка"),
+                            (1, 'Патент на изобретение, свидетельство'),
+                            (2, 'Патент на полезную модель'),
+                            (3, 'Заявка'),
                         ],
                         default=1,
-                        verbose_name="Тип патента",
+                        verbose_name='Тип патента',
                     ),
                 ),
             ],
             options={
-                "verbose_name": "Патент",
-                "verbose_name_plural": "Патенты",
+                'verbose_name': 'Патент',
+                'verbose_name_plural': 'Патенты',
             },
         ),
     ]

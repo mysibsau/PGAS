@@ -11,12 +11,12 @@ from statement.models import Statement
 
 
 class Base(CommentMixin, DocumentMixin, LifecycleModel):
-    id = models.UUIDField(_("ID"), default=uuid.uuid4, primary_key=True, editable=False, unique=True, db_index=True)
-    name = models.CharField("Название", max_length=255)
-    author = models.ForeignKey("user.User", on_delete=models.CASCADE, related_name="%(class)ss")
-    statement = models.ForeignKey(Statement, on_delete=models.CASCADE, related_name="%(class)ss")
-    status = models.IntegerField("Статус", choices=Statement.Status.choices, default=Statement.Status.PENDING)
-    date = models.DateField("Дата проведения", default=datetime.now)
+    id = models.UUIDField(_('ID'), default=uuid.uuid4, primary_key=True, editable=False, unique=True, db_index=True)
+    name = models.CharField('Название', max_length=255)
+    author = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='%(class)ss')
+    statement = models.ForeignKey(Statement, on_delete=models.CASCADE, related_name='%(class)ss')
+    status = models.IntegerField('Статус', choices=Statement.Status.choices, default=Statement.Status.PENDING)
+    date = models.DateField('Дата проведения', default=datetime.now)
 
     class Meta:
         abstract = True
@@ -33,9 +33,9 @@ class Base(CommentMixin, DocumentMixin, LifecycleModel):
     def pretty_status(self) -> str:
         html = '<span data-toggle="tooltip" data-placement="top" title="%s">%s</span>'
         status = {
-            Statement.Status.PENDING: html % ("В обработке", '🤔'),
-            Statement.Status.APPROVED: html % ("Принято", '✅'),
-            Statement.Status.REJECTED: html % ("Отклонено", '❌'),
+            Statement.Status.PENDING: html % ('В обработке', '🤔'),
+            Statement.Status.APPROVED: html % ('Принято', '✅'),
+            Statement.Status.REJECTED: html % ('Отклонено', '❌'),
         }
 
         return status[self.status]
@@ -55,19 +55,19 @@ class Base(CommentMixin, DocumentMixin, LifecycleModel):
 
 class Olympiad(Base):
     class Place(models.IntegerChoices):
-        FIRST = 1, "🥇Первое"
-        SECOND = 2, "🥈Второе"
-        THIRD = 3, "🥉Третье"
-        PARTICIPANT = 4, "Участник"
+        FIRST = 1, '🥇Первое'
+        SECOND = 2, '🥈Второе'
+        THIRD = 3, '🥉Третье'
+        PARTICIPANT = 4, 'Участник'
 
     class Level(models.IntegerChoices):
-        INTERNATIONAL = 1, "Международный"
-        FEDERAL = 2, "Всероссийский"
-        DEPARTMENTAL = 3, "Ведомственный"
-        INNER = 4, "Региональный"
+        INTERNATIONAL = 1, 'Международный'
+        FEDERAL = 2, 'Всероссийский'
+        DEPARTMENTAL = 3, 'Ведомственный'
+        INNER = 4, 'Региональный'
 
-    place = models.IntegerField("Занятое место", choices=Place.choices, default=Place.PARTICIPANT)
-    level = models.IntegerField("Уровень олимпиады", choices=Level.choices, default=Level.INNER)
+    place = models.IntegerField('Занятое место', choices=Place.choices, default=Place.PARTICIPANT)
+    level = models.IntegerField('Уровень олимпиады', choices=Level.choices, default=Level.INNER)
 
     @cached_property
     def preliminary_scores(self) -> int:
@@ -80,17 +80,17 @@ class Olympiad(Base):
         return table[self.level][self.place - 1]
 
     class Meta:
-        verbose_name = "Олимпиада"
-        verbose_name_plural = "Олимпиады"
+        verbose_name = 'Олимпиада'
+        verbose_name_plural = 'Олимпиады'
 
 
 class Patent(Base):
     class Type(models.IntegerChoices):
-        INVENTION = 1, "Патент на изобретение, свидетельство"
-        UTILITY_MODEL = 2, "Патент на полезную модель"
-        APPLICATION = 3, "Заявка"
+        INVENTION = 1, 'Патент на изобретение, свидетельство'
+        UTILITY_MODEL = 2, 'Патент на полезную модель'
+        APPLICATION = 3, 'Заявка'
 
-    type = models.IntegerField("Тип патента", choices=Type.choices, default=Type.INVENTION)
+    type = models.IntegerField('Тип патента', choices=Type.choices, default=Type.INVENTION)
 
     @cached_property
     def preliminary_scores(self) -> int:
@@ -102,20 +102,20 @@ class Patent(Base):
         return table[self.type]
 
     class Meta:
-        verbose_name = "Патент"
-        verbose_name_plural = "Патенты"
+        verbose_name = 'Патент'
+        verbose_name_plural = 'Патенты'
 
 
 class Article(Base):
     class Type(models.IntegerChoices):
-        SCOPUS = 1, "Web of Science/Scopus"
-        VAK = 2, "ВАК"
-        RINC = 3, "РИНЦ"
-        OTHER = 4, "Остальное"
+        SCOPUS = 1, 'Web of Science/Scopus'
+        VAK = 2, 'ВАК'
+        RINC = 3, 'РИНЦ'
+        OTHER = 4, 'Остальное'
 
-    type = models.IntegerField("Тип публикации", choices=Type.choices, default=Type.OTHER)
+    type = models.IntegerField('Тип публикации', choices=Type.choices, default=Type.OTHER)
     url = models.URLField('Ссылка')
-    count_coauthors = models.IntegerField("Количество соавторов", default=0)
+    count_coauthors = models.IntegerField('Количество соавторов', default=0)
 
     @cached_property
     def preliminary_scores(self) -> int:
@@ -128,5 +128,5 @@ class Article(Base):
         return table[self.type]
 
     class Meta:
-        verbose_name = "Публикация"
-        verbose_name_plural = "Публикации"
+        verbose_name = 'Публикация'
+        verbose_name_plural = 'Публикации'

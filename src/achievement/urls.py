@@ -3,13 +3,13 @@ from django.urls import path
 
 from .views.general import AddNewElement, ApproveView, CreateView, DeleteView, RejectView, UpdateView
 
-app_name = "achievements"
+app_name = 'achievements'
 
 
 def generate_urls(model):
-    creatview = type(f"Create{model.__name__}View", (CreateView,), {"model": model})
-    editview = type(f"Edit{model.__name__}View", (UpdateView,), {"model": model})
-    deleteview = type(f"Delete{model.__name__}View", (DeleteView,), {"model": model})
+    creatview = type(f'Create{model.__name__}View', (CreateView,), {'model': model})
+    editview = type(f'Edit{model.__name__}View', (UpdateView,), {'model': model})
+    deleteview = type(f'Delete{model.__name__}View', (DeleteView,), {'model': model})
     approveview = type(f'Approve{model.__name__}View', (ApproveView,), {'model': model})
     rejectview = type(f'Reject{model.__name__}View', (RejectView,), {'model': model})
     model_name = model._meta.model_name
@@ -24,8 +24,8 @@ def generate_urls(model):
 
 
 urlpatterns = [
-    path("<uuid:pk>/add", AddNewElement.as_view(), name="new_achievement"),
+    path('<uuid:pk>/add', AddNewElement.as_view(), name='new_achievement'),
 ]
 
-for model in apps.get_app_config("achievement").get_models():
+for model in apps.get_app_config('achievement').get_models():
     urlpatterns.extend(generate_urls(model))
