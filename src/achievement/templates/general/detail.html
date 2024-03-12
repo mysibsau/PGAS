@@ -37,7 +37,7 @@
         {% include 'comment/detail.html' with object=object %}
 
         <biv class="btnn position-absolute top-0 end-0 col">
-            {% if object.statement.user == request.user and object.statement.active %}
+            {% if object.statement.user == request.user and object.statement.active and object.status != 1 %}
             <a href="{{ object|edit_link }}"
                 class="button row mb-1"
                 data-toggle="tooltip" data-placement="left" title="Редактировать">

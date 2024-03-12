@@ -5,11 +5,12 @@ from comment.mixins import ModelMixin as CommentMixin
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from django_lifecycle import AFTER_UPDATE, LifecycleModel, hook
 from document.mixins import ModelMixin as DocumentMixin
 from statement.models import Statement
 
 
-class Base(CommentMixin, DocumentMixin):
+class Base(CommentMixin, DocumentMixin, LifecycleModel):
     id = models.UUIDField(_("ID"), default=uuid.uuid4, primary_key=True, editable=False, unique=True, db_index=True)
     name = models.CharField("Название", max_length=255)
     author = models.ForeignKey("user.User", on_delete=models.CASCADE, related_name="%(class)ss")
@@ -19,6 +20,15 @@ class Base(CommentMixin, DocumentMixin):
 
     class Meta:
         abstract = True
+
+    @hook(AFTER_UPDATE)
+    def change_status(self):
+        if self.has_changed('status'):
+            return
+        if not self._diff_with_initial:
+            return
+        self.status = Statement.Status.PENDING
+        self.save(skip_hooks=True)
 
     def pretty_status(self) -> str:
         html = '<span data-toggle="tooltip" data-placement="top" title="%s">%s</span>'
