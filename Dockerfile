@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12
 
 ENV VIRTUAL_ENV=/usr/local
 WORKDIR /app
@@ -6,7 +6,7 @@ WORKDIR /app
 RUN pip install --upgrade --no-cache-dir pip && pip install uv
 COPY ./requirements.txt .
 
-RUN /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 COPY ./src .
 
