@@ -8,16 +8,9 @@
             {% csrf_token %}
             {% bootstrap_form form %}
             {% include 'document/edit.html' %}
-            <button type="submit" class="btn btn-success" onclick="reloadList()">Сохранить</button>
-            <a class="btn btn-warning" href="{% url 'achievements:new_achievement' pk=statement.pk %}">Отмена</a>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <a class="btn btn-warning"
+               href="{% url 'achievements:new_achievement' pk=statement.pk %}">Отмена</a>
         </form>
     </div>
-    <script>
-        function reloadList() {
-            setTimeout(function () {
-                const listFrame = document.getElementById('statement_{{ statement.pk }}');
-                listFrame.reload();
-            }, 1000);
-        }
-    </script>
 </turbo-frame>
