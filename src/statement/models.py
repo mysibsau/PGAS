@@ -42,17 +42,19 @@ class Statement(LifecycleModelMixin, models.Model):
     @cached_property
     def score(self) -> int:
         score = 0
-        olympiads = self.olympiads.all().filter(status=Statement.Status.APPROVED)
-        for olympiad in olympiads:
-            score += olympiad.score
+        all_ahivments = self.achievements().values()
+        for achievement in all_ahivments:
+            for ahivment in achievement.filter(status=Statement.Status.APPROVED):
+                score += ahivment.score
         return score
 
     @cached_property
     def preliminary_scores(self) -> int:
         score = 0
-        olympiads = self.olympiads.all()
-        for olympiad in olympiads:
-            score += olympiad.preliminary_scores
+        all_ahivments = self.achievements().values()
+        for achievement in all_ahivments:
+            for ahivment in achievement:
+                score += ahivment.preliminary_scores
         return score
 
     @cached_property
