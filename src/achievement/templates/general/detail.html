@@ -19,6 +19,7 @@
 </style>
 
 {% load edit_link %}
+{% load delete_link %}
 
 <turbo-frame id="achievement_{{ object.pk }}">
     <div class="block-text mb-5 position-relative">
@@ -33,31 +34,39 @@
 
         {% include 'comment/detail.html' with object=object %}
 
-        {% if object.statement.user == request.user and object.statement.active %}
+        <biv class="btnn position-absolute top-0 end-0 col">
+            {% if object.statement.user == request.user and object.statement.active %}
             <a href="{{ object|edit_link }}"
-               class="btn btnn btn-outline-primary rounded-circle position-absolute top-0 start-100 translate-middle">
-                <i class="fas fa-pen"></i>
-            </a>
-        {% endif %}
+                class="button row mb-1"
+                data-toggle="tooltip" data-placement="left" title="Редактировать">
+                    <i class="fas fa-pen"></i>
+                </a>
+                <br>
+                <form action="{{ object|delete_link }}" method="post"
+                    data-turbo-confirm="Вы действительно хотите удалить это достижение?">
+                    {% csrf_token %}
+                    <button type="submit" class="button row" data-toggle="tooltip" data-placement=" left" title="Удалить">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            {% endif %}
 
-        {% if request.user.is_staff %}
-            <biv class="btnn position-absolute top-0 end-0 col">
+            {% if request.user.is_staff %}
                 {% if object.status == 0 or object.status == 2 %}
-                    <a href="{{ object|edit_link }}"
-                       class="button row mb-1"
-                       data-toggle="tooltip" data-placement="left" title="Одобрить достижение">
-                        ✅
-                    </a>
-                    <br>
+                <a href="{{ object|edit_link }}" class="button row mb-1" data-toggle="tooltip" data-placement="left"
+                    title="Одобрить достижение">
+                    <i class="fas fa-check-square"></i>
+                </a>
+                <br>
                 {% endif %}
                 {% if object.status == 0 or object.status == 1 %}
-                    <a href="{{ object|edit_link }}"
-                       class="button row"
-                       data-toggle="tooltip" data-placement="left" title="Отклонить достижение">
-                        ❌
-                    </a>
+                <a href="{{ object|edit_link }}" class="button row" data-toggle="tooltip" data-placement="left"
+                    title="Отклонить достижение">
+                    <i class="fas fa-times-circle"></i>
+                </a>
                 {% endif %}
-            </biv>
-        {% endif %}
+            {% endif %}
+        </biv>
+
     </div>
 </turbo-frame>
