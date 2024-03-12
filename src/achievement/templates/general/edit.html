@@ -10,9 +10,5 @@
             {% include 'document/edit.html' with documents=object.documents %}
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>
-{#        <form method="post" action="{% url 'achievements:patent_delete' pk=patent.pk %}">#}
-{#            {% csrf_token %}#}
-{#            <button type="submit" class="btn btn-danger">Удалить</button>#}
-{#        </form>#}
     </div>
 </turbo-frame>
