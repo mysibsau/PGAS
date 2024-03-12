@@ -94,7 +94,7 @@ class Statement(LifecycleModelMixin, models.Model):
         number = int(self.id.hex, 16)
 
         backgrounds = []
-        for root, dirs, files in os.walk("./statement/static/statement/backgrounds"):
+        for _root, _dirs, files in os.walk('./statement/static/statement/backgrounds'):
             for file in files:
                 if file.split(".")[-1] in ["jpg", "jpeg", "png"]:
                     backgrounds.append(file)

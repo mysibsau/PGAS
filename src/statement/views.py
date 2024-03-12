@@ -41,7 +41,6 @@ class StatementCreateView(CreateView):
             old_statement = Statement.objects.filter(user=self.request.user).exclude(pk=self.object.pk).last()
             for achievements in old_statement.achievements().values():
                 for achievement in achievements:
-                    print(achievement, achievement.actual, flush=True)
                     if not achievement.actual:
                         continue
                     achievement.pk = None

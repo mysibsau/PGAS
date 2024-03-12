@@ -50,7 +50,7 @@ class Base(CommentMixin, DocumentMixin, LifecycleModel):
     def actual(self) -> bool:
         if datetime.now().month >= 9:
             return self.date.year == datetime.now().year
-        return self.date.year == datetime.now().year - 1 or self.date.year == datetime.now().year
+        return self.date.year in (datetime.now().year - 1, datetime.now().year)
 
 
 class Olympiad(Base):

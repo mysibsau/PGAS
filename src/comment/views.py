@@ -38,5 +38,4 @@ class ListCommentsViews(ListView, LoginNotRequiredMixin):
         for f in all_fields:
             if f.is_relation:
                 filter |= Q(**{f.name: self.kwargs['pk']})
-        print(Comment.objects.filter(filter).count())
         return Comment.objects.filter(filter)

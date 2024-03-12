@@ -60,10 +60,11 @@ class UpdateView(GeneralView, generic.UpdateView):
 
     def get_object(self, queryset=None):
         object = super().get_object(queryset)
+        msg = "You can't edit this object"
         if object.author != self.request.user:
-            raise PermissionDenied("You can't edit this object")
+            raise PermissionDenied(msg)
         if not object.statement.active:
-            raise PermissionDenied("You can't edit this object")
+            raise PermissionDenied(msg)
         return object
 
     def get_success_url(self):
@@ -73,10 +74,11 @@ class UpdateView(GeneralView, generic.UpdateView):
 class DeleteView(generic.DeleteView):
     def get_object(self, queryset=None):
         object = super().get_object(queryset)
+        msg = "You can't delete this object"
         if object.author != self.request.user:
-            raise PermissionError("You can't delete this object")
+            raise PermissionError(msg)
         if not object.statement.active:
-            raise PermissionError("You can't delete this object")
+            raise PermissionError(msg)
         return object
 
     def get_success_url(self):
@@ -104,7 +106,8 @@ class ApproveView(GeneralView, SingleObjectMixin, generic.View):
     def get_object(self, queryset=None):
         object = super().get_object(queryset)
         if not self.request.user.is_staff or not object.statement.active:
-            raise PermissionError("You can't approve this object")
+            msg = "You can't approve this object"
+            raise PermissionError(msg)
         return object
 
 
