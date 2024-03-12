@@ -3,13 +3,9 @@
 
     <div class="body" style="display: none;">
         <div class="inline-comments-content mb-5">
-            {% for comment in object.comments.all %}
-                <div class="mb-3">
-                    <div class="inline-comments-author">{{ comment.author.first_name }}</div>
-                    <div class="inline-comments-body">{{ comment.text }}</div>
-                </div>
-            {% endfor %}
-        </div>
+            {% include 'comment/comment_list.html' with comments=object.comments.all %}
+            </div>
+        Вы можете <a href="{% url 'comments:share' pk=object.pk %}" target="_top">поделиться</a> историей комметрариев
         {% include 'comment/comment_form.html' %}
     </div>
 </div>

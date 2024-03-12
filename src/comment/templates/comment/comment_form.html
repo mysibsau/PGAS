@@ -1,7 +1,6 @@
 {% load django_bootstrap5 %}
 {% load class_name %}
 
-
 {% block content %}
     <form class="inline-comments-inputs" method="post" action="{% url 'comments:create_comment' %}">
         {% csrf_token %}
