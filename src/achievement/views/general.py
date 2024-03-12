@@ -1,3 +1,4 @@
+from comment.models import Comment
 from django.apps import apps
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
@@ -82,13 +83,20 @@ class DeleteView(generic.DeleteView):
 
 
 class ApproveView(GeneralView, SingleObjectMixin, generic.View):
+    STATUS = Statement.Status.APPROVED
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.set_status()
+        self.object.comments.add(
+            Comment.objects.create(
+                text=f'Статус изменен: {self.STATUS._label_}',
+            ),
+        )
         return HttpResponseRedirect(self.get_success_url())
 
     def set_status(self):
-        self.object.status = 1
+        self.object.status = self.STATUS
         self.object.save()
 
     def get_object(self, queryset=None):
@@ -99,6 +107,4 @@ class ApproveView(GeneralView, SingleObjectMixin, generic.View):
 
 
 class RejectView(ApproveView):
-    def set_status(self):
-        self.object.status = 2
-        self.object.save()
+    STATUS = Statement.Status.REJECTED

@@ -1,11 +1,10 @@
 import uuid
 from datetime import datetime
 
+from comment.mixins import ModelMixin as CommentMixin
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
-
-from comment.mixins import ModelMixin as CommentMixin
 from document.mixins import ModelMixin as DocumentMixin
 from statement.models import Statement
 
