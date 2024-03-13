@@ -14,10 +14,10 @@ class CommentCreateView(CreateView):
         form.instance.author = self.request.user
         class_name = self.request.POST['object_name']
         result = super().form_valid(form)
-        ahivment = getattr(self.object, f'{class_name}_set').model.objects.get(pk=self.request.POST['object_pk'])
-        if ahivment.author != self.request.user:
-            ahivment.author.notify(
-                f'К вашему достижению "{ahivment.name}" был добавлен комментарий: "{self.object.text}"',
+        achievement = getattr(self.object, f'{class_name}_set').model.objects.get(pk=self.request.POST['object_pk'])
+        if achievement.author != self.request.user:
+            achievement.author.notify(
+                f'К вашему достижению "{achievement.name}" был добавлен комментарий: "{self.object.text}"',
             )
         getattr(self.object, f'{class_name}_set').add(self.request.POST['object_pk'])
         return result
@@ -34,8 +34,8 @@ class ListCommentsViews(ListView, LoginNotRequiredMixin):
 
     def get_queryset(self):
         all_fields = Comment._meta.get_fields()
-        filter = Q()
+        query = Q()
         for f in all_fields:
             if f.is_relation:
-                filter |= Q(**{f.name: self.kwargs['pk']})
-        return Comment.objects.filter(filter)
+                query |= Q(**{f.name: self.kwargs['pk']})
+        return Comment.objects.filter(query)
