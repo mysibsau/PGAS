@@ -19,7 +19,6 @@ INSTALLED_APPS = [
     'django_lifecycle_checks',
     'django_bootstrap5',
     'odoo_auth',
-    'turbo',
     'common',
     'user',
     'document',
