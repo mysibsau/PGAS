@@ -1,1 +1,72 @@
-.inline-comments{position:relative;display:flex;flex-direction:column;gap:10px;padding:45px 20px 20px;border-radius:15px;background-color:#f5f6f8;width:100%;box-sizing:border-box}.inline-comments-header{cursor:pointer;display:block;position:absolute;padding:16px 20px;box-sizing:border-box;border-radius:15px;top:0;left:0;width:100%;font-weight:700;font-size:19px;min-height:65px}.inline-comments-header:hover{background-color:#01223E;color:#fff}.inline-comments-content{display:block;padding-top:30px}.inline-comments-author{cursor:pointer;float:left;background-color:#01223E;color:#fff;padding:2px 10px 1px;margin:0 7px;border-radius:15px}.inline-comments-body{line-height:1.7em;text-overflow:ellipsis}.inline-comments-inputs{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:5px}.inline-comments-form-textarea{flex:1;padding:7px 10px;line-height:1.5em;min-height:3em;-webkit-appearance:none;appearance:none;border:solid 2px #CCC;border-radius:15px;box-sizing:border-box;outline:none}
+.inline-comments {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 45px 20px 20px;
+    border-radius: 15px;
+    background-color: #f5f6f8;
+    width: 100%;
+    box-sizing: border-box
+}
+
+.inline-comments-header {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 19px;
+    min-height: 65px
+}
+
+.inline-comments-header:hover {
+    background-color: #01223E;
+    color: #fff
+}
+
+.inline-comments-content {
+    display: block;
+    padding-top: 30px
+}
+
+.inline-comments-author {
+    cursor: pointer;
+    float: left;
+    background-color: #01223E;
+    color: #fff;
+    padding: 2px 10px 1px;
+    margin: 0 7px;
+    border-radius: 15px
+}
+
+.inline-comments-body {
+    line-height: 1.7em;
+    text-overflow: ellipsis
+}
+
+.inline-comments-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5px
+}
+
+.inline-comments-form-textarea {
+    flex: 1;
+    padding: 7px 10px;
+    line-height: 1.5em;
+    min-height: 3em;
+    -webkit-appearance: none;
+    appearance: none;
+    border: solid 2px #CCC;
+    border-radius: 15px;
+    box-sizing: border-box;
+    outline: none
+}

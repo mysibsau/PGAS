@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'odoo_auth',
     'turbo',
-    'sass_processor',
     'common',
     'user',
     'document',
@@ -131,6 +130,4 @@ MEDIA_URL = '/media/'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'sass_processor.finders.CssFinder',
 ]
-SASS_PROCESSOR_AUTO_INCLUDE = False

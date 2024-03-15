@@ -1,1 +1,6 @@
-body,html{background-color:#f5f6f8;height:100%;font-family:"Ubuntu", Helvetica, Verdana, sans-serif;color:#01223E}
+body, html {
+    background-color: #f5f6f8;
+    height: 100%;
+    font-family: "Ubuntu", Helvetica, Verdana, sans-serif;
+    color: #01223E
+}
