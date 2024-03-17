@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
     <turbo-frame id="statement_{{ statement.pk }}">
-        <div class="block-text">
-            <div class="header-2">Моя заявка на {{ statement.create_at.year }} год
-                {{ statement.pretty_status|safe }}</div>
-            <div class="header-3 mb-3">{{ statement.term }} семетр</div>
-            Предварительные баллы: {{ statement.preliminary_scores }} <br>
-            Текущие баллы: {{ statement.score }} <br>
-            <a class="btn btn-secondary btn-lg mt-5" data-toggle="tooltip" data-placement="top"
-               title="Распечатайте этот бланк после заполнения всех достижений">Скачать
-                бланк</a>
-        </div>
+        {% if request.user.is_staff %}
+            <div class="block-text">
+                <div class="header-2">Заявка от {{ statement.user }}, {{ statement.user.group }}
+                    {{ statement.pretty_status|safe }}</div>
+                <div class="header-3 mb-3">{{ statement.create_at.year }} год | {{ statement.term }} семетр</div>
+                Предварительные баллы: {{ statement.preliminary_scores }} <br>
+                Текущие баллы: {{ statement.score }} <br>
+            </div>
+        {% else %}
+            <div class="block-text">
+                <div class="header-2">Моя заявка на {{ statement.create_at.year }} год
+                    {{ statement.pretty_status|safe }}</div>
+                <div class="header-3 mb-3">{{ statement.term }} семетр</div>
+                Предварительные баллы: {{ statement.preliminary_scores }} <br>
+                Текущие баллы: {{ statement.score }} <br>
+                {% if statement.active and statement.user == request.user %}
+                    <a class="btn btn-secondary btn-lg mt-5" data-toggle="tooltip" data-placement="top"
+                       title="Распечатайте этот бланк после заполнения всех достижений">Скачать
+                        бланк</a>
+                {% endif %}
+            </div>
+        {% endif %}
 
         {% for key, models in statement.achievements.items %}
             {% if models.count %}

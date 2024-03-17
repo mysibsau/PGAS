@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.urls import path
 
-from .views.general import AddNewElement, ApproveView, CreateView, DeleteView, RejectView, UpdateView
+from .views.general import AddNewElement, ApproveView, CreateView, DeleteView, RejectView, UpdateView, Test
 
 app_name = 'achievements'
 
@@ -25,6 +25,7 @@ def generate_urls(model):
 
 urlpatterns = [
     path('<uuid:pk>/add', AddNewElement.as_view(), name='new_achievement'),
+    path('test', Test.as_view()),
 ]
 
 for model in apps.get_app_config('achievement').get_models():

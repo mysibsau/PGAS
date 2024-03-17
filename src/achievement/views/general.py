@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.views.generic.detail import SingleObjectMixin
+
+from common.views import PDFView
 from statement.models import Statement
 
 
@@ -113,3 +115,12 @@ class ApproveView(GeneralView, SingleObjectMixin, generic.View):
 
 class RejectView(ApproveView):
     STATUS = Statement.Status.REJECTED
+
+
+class Test(PDFView):
+    template_name = 'documents/test.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
