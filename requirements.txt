@@ -1,4 +1,4 @@
-django==5.0.1
+django==5.0.6
 loguru==0.7.2
 whitenoise==6.6.0
 gunicorn==21.2.0
